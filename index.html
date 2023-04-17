@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Capston</title>
+    <link rel="stylesheet" href="Stylesheet.css">
+</head>
+<body>
+	<h1>Anonymous reflective questions</h1>
+	<p id="question"></p>
+	<form onsubmit="submitAnswer(); return false;">
+		<label for="answer">Your answer:</label>
+		<input type="text" id="answer" name="answer" required>
+		<input type="submit" value="Submit">
+	</form>
+	<button onclick="generateQuestion()">Generate Question</button>
+
+	<script>
+		var questions = [
+			"Are you thinking negative thoughts befor you fall asleep?",
+			"What worries you most about the future?",
+			"On a scale of 1 to 10, how is you rmental health at the moment?",
+			"Heres a story. Once upon a time there was a farmer, and he had a horse. He loved his horse so much because it supports the farmer's family. It was his pride and joy as it helps the farmer earn money. Until one day the horse ran away. The community heard about it. But then the next day the horse came back but with four more horses. The farmer now had five horses an was very lucky. The farmer then tries to train one of his new horse but instead get kicked! He sson finds out the he broke his leg into three pieces. The news spread far and wide and his neighbours founf him to be very unlucky. But then the military came to draft more soldiers and the farmer was able avoid it. When something awful happens to us, it is quite easy to have a pessimistic mindset. But we need to remember that everything happens for a reason. Who knows something bad might turn out to be good in the long run? What did you think, does this story help you put it into perspective?",
+			"Is it it more important to love or to be loved? (Yes or No)",
+			"Do you think winning or losing is important (Yes or No)",
+			"Do you think it is important to step out of your comfort zone? (Yes or No)",
+			"Journal, Make a list of everything that inspires you. It can be anything in the world, simply reflect?", 
+			"What do you like about life ",
+			"Does it matter what others think about you? ",
+			"Are taking care of yourself physically? ",
+			"What are you most looking forward to today/ or tomorrow? ",
+			"How are you feeling about school overall?",
+			"This is a self examination excercise: This is a useful exercise if you frequently spend a lot of time trying to figure out why someone else's behaviours irritate you. You can also use a lot of mental effort deciding how to tell that individual what bothers you. Try to remind yourself that this situation, no matter how genuine or essential it is to you, is not the whole total of your emotions. When you communicate this information, keep in mind that a person who loves you does not want to be the source of your sadness—do not inflict them extra anguish because of your unhappiness. When bringing up difficulties, keep the wider picture in mind otherwise you risk turning a little issue into a much larger one. Do you think you will use this excercise again? "
+
+		];
+
+		var currentQuestionIndex = -1;
+
+		function generateQuestion() {
+			// Choose a new question that's different from the previous one
+			var newIndex = Math.floor(Math.random() * questions.length);
+			while (newIndex === currentQuestionIndex) {
+				newIndex = Math.floor(Math.random() * questions.length);
+			}
+			currentQuestionIndex = newIndex;
+
+			var randomQuestion = questions[currentQuestionIndex];
+			document.getElementById("question").innerHTML = randomQuestion;
+			document.getElementById("answer").value = "";
+		}
+
+		function submitAnswer() {
+			var answer = document.getElementById("answer").value;
+			if (answer.trim() === "") {
+				alert("Please enter an answer.");
+				return;
+			}
+
+			if (currentQuestionIndex === 5) {
+				if (answer.toLowerCase() === "yes") {
+					alert("How come?");
+				} else if (answer.toLowerCase() === "no") {
+					alert("How come?");
+				} else {
+					alert("Please answer 'Yes' or 'No'.");
+					return;
+				}
+			} else if (currentQuestionIndex === 6) {
+				if (answer.toLowerCase() === "yes") {
+					alert("Why? Reflect");
+				} else if (answer.toLowerCase() === "no") {
+					alert("Why?");
+				} else {
+					alert("Please answer 'Yes' or 'No'.");
+					return;
+				}
+			} else {
+				alert("You answered: " + answer);
+			}
+
+			// Clear the answer field and generate a new question
+			document.getElementById("answer").value = "";
+			generateQuestion();
+		}
+
+		// Generate the first question
+		generateQuestion();
+	</script>
+</body>
+</html>
